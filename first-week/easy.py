@@ -64,7 +64,8 @@ class Solution(object):
         """
         vis = set()
         for num in nums:
-            if num in vis: return True
+            if num in vis:
+                return True
             vis.add(num)
         return False
 
@@ -197,5 +198,6 @@ class Solution:
     # @return an integer
     def singleNumber(self, A):
         ans = 0
-        for num in A:  ans ^=num
+        for num in A:
+            ans ^=num
         return ans
