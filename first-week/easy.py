@@ -201,3 +201,64 @@ class Solution:
         for num in A:
             ans ^=num
         return ans
+
+
+
+
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) < 2:
+            return len(nums)
+
+        if not nums:
+            return 0
+
+        newTail = 0
+        for i in range(1, len(nums)):
+            if nums[i] != nums[newTail]:
+                newTail += 1
+                nums[newTail] = nums[i]
+
+        return newTail + 1
+
+
+a  = Solution()
+nums = [1, 2, 2,  3, 4, 4,  5,]
+print(a.removeDuplicates(nums))
+
+
+
+## subsets Three solutions
+# DFS recursively
+def subsets1(self, nums):
+    res = []
+    self.dfs(sorted(nums), 0, [], res)
+    return res
+
+def dfs(self, nums, index, path, res):
+    res.append(path)
+    for i in xrange(index, len(nums)):
+        self.dfs(nums, i+1, path+[nums[i]], res)
+
+# Bit Manipulation
+def subsets2(self, nums):
+    res = []
+    nums.sort()
+    for i in xrange(1<<len(nums)):
+        tmp = []
+        for j in xrange(len(nums)):
+            if i & 1 << j:  # if i >> j & 1:
+                tmp.append(nums[j])
+        res.append(tmp)
+    return res
+
+# Iteratively
+def subsets(self, nums):
+    res = [[]]
+    for num in sorted(nums):
+        res += [item+[num] for item in res]
+    return res
